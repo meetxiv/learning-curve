@@ -15,16 +15,36 @@ Set up this repository and planned my learning path. Decided to document everyth
 I've always been curious about how data drives decisions. Instead of just watching tutorials, I'm committing to building real understanding through practice.
 
 **My approach:**  
-- Start with strong Python fundamentals (most jobs require this)
+- Start with strong Python fundamentals
 - Don't rush to ML—understand the foundations first
 - Document what I learn, including mistakes
 - Build small projects as I go
+- No matter how hard the problem is, be consistent, take breaks, google and build problem solving thinking. 
 
 **Today's realization:**  
 There's no shortcut. Everyone who's good at this put in the hours. My job is to show up consistently.
 
 **Next:** Starting with Python basics—variables, data types, operators.
 
+---
+
+### Day 2 | Jan 4, 2026
+
+**What I did:**  
+Completed 10 Python exercises on variables, data types, and operators.
+
+**Key insights:**
+- Used `sep` and `end` parameters in `print()` to format output—cleaner than string concatenation
+- `sep` is used when multiple parameters are passed in the same `print()` function and `end` when communicating through multiple `print()` functions
+- `.join()` is actually very flexible and can be used in scenarios creatively 
+- Discovered `map()` + `split()` combo for converting user input strings to numeric tuples in one line: `tuple(map(int, input().split(',')))`
+- Solved the dogs-chickens problem using constraint validation (legs must be even, within valid range) before calculation—learned to fail early
+- Floor division (`//`) vs regular division matters for discrete quantities like counting glasses of milk
+- Input validation isn't optional—added checks for impossible scenarios (like odd number of legs for animals)
+
+**Struggled with:** Initially overcomplicated the chicken-dogs problem by approaching it with rule based constraints and even factorising the problem, later realised it is solvable with basic linear algebra.
+
+THINKING ELEMENTARY SOLVES THE PROBLEM.
 ---
 
 *Log entries will be added as I progress...*

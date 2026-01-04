@@ -13,16 +13,6 @@ I believe the best way to learn is to build in public. Every notebook here repre
 🎯 **Now Learning:** Python Fundamentals  
 📅 **Started:** January 2026
 
-## What's Inside
-
-| Section | Topics | Status |
-|---------|--------|--------|
-| Python Fundamentals | Variables, Control Flow, Data Structures | 🔄 In Progress |
-| Object-Oriented Programming | Classes, Inheritance, Composition | 🔜 Coming Soon |
-| NumPy | Arrays, Operations, Broadcasting | 🔜 Coming Soon |
-| Pandas | *Planned* | 🔜 Coming Soon |
-| Machine Learning | *Planned* | 🔜 Coming Soon |
-
 ## Learning Log
 
 I maintain a daily log of what I learn, struggle with, and figure out.  
@@ -32,9 +22,10 @@ I maintain a daily log of what I learn, struggle with, and figure out.
 
 Things I'm curious about (will update as I learn):
 
-- [ ] Why is NumPy faster than Python lists?
 - [ ] When to use OOP vs functional programming in data science?
-- [ ] What makes a good ML project for a portfolio?
+- [ ] How to iterate over multiple lists simultaneously without using index variables?
+- [ ] Why are dictionary lookups so much faster than list searches?
+- [ ] What is the 'Diamond Problem' in multiple inheritance?
 
 ## Connect
 
