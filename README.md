@@ -20,12 +20,8 @@ I maintain a daily log of what I learn, struggle with, and figure out.
 
 ## Open Questions
 
-Things I'm curious about (will update as I learn):
-
-- [ ] When to use OOP vs functional programming in data science?
-- [ ] How to iterate over multiple lists simultaneously without using index variables?
-- [ ] Why are dictionary lookups so much faster than list searches?
-- [ ] What is the 'Diamond Problem' in multiple inheritance?
+Questions I'm exploring as I learn. Some answered, some still figuring out.  
+→ **[View Open Questions](./OPEN_QUESTIONS.md)**
 
 ## Connect
 
