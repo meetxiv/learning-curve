@@ -66,4 +66,42 @@ Hypothesis: Probably has to do with contiguous memory allocation and vectorized 
 
 ---
 
+## Control Flow & Algorithms
+
+### ✅ Why check only up to √n for prime numbers?
+**Answered:** If `n = a × b`, one of them must be ≤ √n. So if no factor exists up to √n, none exists at all.
+
+Example: For n=36, factors are (1,36), (2,18), (3,12), (4,9), (6,6). Notice 6 = √36 is the pivot—after that, pairs just flip. Checking up to 6 is enough.
+
+**Complexity:** Reduces from O(n) to O(√n). For n=1,000,000, that's 1000 checks instead of 1,000,000.
+
+---
+
+### ✅ How to extract digits from a number without converting to string?
+**Answered:** Use modulo and integer division:
+```python
+while num > 0:
+    last_digit = num % 10    # remainder gives last digit
+    num = num // 10          # integer division removes it
+```
+This is faster than `str(num)` and more "algorithmic." Used in: reversing numbers, Armstrong check, digit sum problems.
+
+---
+
+### 🔄 When to use `while` vs `for` loops?
+**Current understanding:**
+- `for`: When you know the number of iterations (iterating over collections, ranges)
+- `while`: When termination depends on a condition (user input until 'quit', convergence in algorithms)
+
+Still exploring: Are there performance differences? Does it matter for data science workflows?
+
+---
+
+### 🔄 How do real-world applications handle floating point precision errors?
+**Context:** In the clock angle problem, calculations like `30.5 * 7` can produce `213.50000000000003`.
+
+**Status:** Need to research. Using `round()` for now, but there must be better practices.
+
+---
+
 *Questions will be added and answered as I progress through my learning journey.*

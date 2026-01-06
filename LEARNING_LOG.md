@@ -71,4 +71,47 @@ The histogram problem was tricky. I had to figure out how to dynamically generat
 
 ---
 
+### Day 4 | Jan 6, 2026
+
+**What I did:**  
+Solved 14 problems on conditionals and control flow—salary calculations, number theory (primes, Armstrong, Fibonacci), and even a robot movement tracker.
+
+
+**1. Prime number optimization:**  
+Instead of checking all numbers up to `n`, only check up to `√n`. If a number has a factor greater than its square root, it must also have one smaller than it. Reduced complexity from O(n) to O(√n).
+```python
+for num in range(2, int(n**0.5) + 1):  # not range(2, n)
+```
+
+**2. Digit extraction pattern:**  
+To process each digit of a number without converting to string:
+```python
+while num > 0:
+    digit = num % 10   # extract last digit
+    num //= 10         # remove last digit
+```
+Used this for reversing numbers and checking Armstrong numbers. Pure math > string manipulation.
+
+**3. State machines with dictionaries:**  
+Built a robot tracker that maintains position using a dictionary as state:
+```python
+moves = {'U': 0, 'D': 0, 'L': 0, 'R': 0}
+moves[direction] += distance
+```
+Much cleaner than multiple if-else chains or separate variables.
+
+**4. Clock angle problem:**  
+The minute hand moves 6° per minute (360°/60). The hour hand moves 0.5° per minute (30°/60). I spent hell lot of time on this problem scribbling calculations on paper trying tp find out methods and in the end this problem taught me to think in terms of rates, not positions.
+
+**5. Multiple exit conditions in loops:**  
+Combining `continue` (skip iteration) and `break` (exit loop) for complex conditions like "sum until 300, but skip multiples of 5."
+
+**Struggled with:**  
+The clock angle problem initially. I was calculating positions instead of relative movement. Had to step back and think about it mathematically—both hands start at 12, minute hand laps the hour hand. The angle is just the difference in their positions.
+
+**Pattern I'm noticing:**  
+Most "tricky" problems become simple once you identify the underlying math. Fibonacci is just addition with memory. Prime checking is about factors. Armstrong is digit extraction + power. The code is just translating math to syntax and the Clock problem is just rate determination.
+
+---
+
 *Log entries will be added as I progress...*
