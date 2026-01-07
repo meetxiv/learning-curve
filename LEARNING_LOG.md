@@ -114,4 +114,74 @@ Most "tricky" problems become simple once you identify the underlying math. Fibo
 
 ---
 
+### Day 5 | Jan 7, 2026
+
+**What I did:**  
+Worked on loop problems—pattern printing, series calculations, string manipulations. The classic nested loops territory.
+
+**Key insights:**
+
+**1. Nested loops are just 2D thinking:**  
+Pattern problems clicked when I started visualizing them as coordinate systems. Outer loop = row (y), inner loop = column (x). For the descending triangle:
+```python
+for i in range(n, 0, -1):      # rows: 5,4,3,2,1
+    for j in range(i, 0, -1):  # cols in each row
+        print(j, end=' ')
+    print()
+```
+The trick is figuring out how the inner loop's range relates to the outer loop's variable.
+
+**2. Pyramid spacing formula:**  
+For centered pyramids, spaces decrease as stars increase. If you're at row `i`, you need `n-i` leading spaces:
+```python
+print(' ' * (n - i), end='')
+print('* ' * i)
+```
+Simple once you see it, but took me a while to derive instead of just copying.
+
+**3. Building numbers mathematically (series trick):**  
+For series like `2 + 22 + 222 + 2222...`, instead of string concatenation, use math:
+```python
+s = 0
+for i in range(n):
+    s = s * 10 + 2   # s becomes: 2, 22, 222, 2222...
+    sum += s
+```
+Each iteration shifts left (multiply by 10) and adds the digit. This is how you build numbers programmatically.
+
+**4. `itertools.permutations` is a lifesaver:**  
+When asked to print all unique arrangements of [1,2,3,4], I initially thought about 4 nested loops. Then discovered:
+```python
+from itertools import permutations
+for p in permutations([1,2,3,4]):
+    print(*p)
+```
+Learning when to use the standard library vs reinventing the wheel is a skill itself.
+
+**5. String symmetry without slicing tricks:**  
+To check if a string like "khokho" is symmetrical (both halves same):
+```python
+first_half = s[:len(s)//2]
+second_half = s[-(len(s)//2):]  # negative indexing from end
+```
+The `-n:` slice syntax is cleaner than calculating `len(s)//2` for the start index.
+
+**6. Character classification loop:**  
+For sorting characters by type (lowercase, uppercase, others), three accumulators work better than sorting:
+```python
+for char in s:
+    if char.islower(): lowercase += char
+    elif char.isupper(): uppercase += char
+    else: other += char
+```
+One pass, O(n), no sorting overhead.
+
+**Struggled with:**  
+The pyramid pattern alignment. I kept getting off-by-one errors with the spaces. Had to actually draw it out on paper, number the positions, and trace through my loop manually before the formula clicked.
+
+**Realization:**  
+Pattern problems aren't really about patterns—they're about finding the mathematical relationship between row number and what gets printed. Once you find that formula, the code writes itself.
+
+---
+
 *Log entries will be added as I progress...*

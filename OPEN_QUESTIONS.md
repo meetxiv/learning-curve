@@ -97,6 +97,34 @@ Still exploring: Are there performance differences? Does it matter for data scie
 
 ---
 
+### ✅ How do nested loops relate to pattern problems?
+**Answered:** Think of them as coordinate systems! Outer loop = y-axis (rows), inner loop = x-axis (columns within that row).
+
+The key insight: the inner loop's behavior usually depends on the outer loop's variable. For a triangle:
+- Row 1: print 1 number
+- Row 2: print 2 numbers
+- Row n: print n numbers
+
+So inner loop runs `i` times when outer loop is at iteration `i`:
+```python
+for i in range(1, n+1):        # which row
+    for j in range(1, i+1):    # how many items in this row
+        print(j, end=' ')
+    print()
+```
+
+---
+
+### 🔄 When should I use standard library functions vs writing my own implementation?
+**Current thinking:**
+- Learning: Write your own first to understand the algorithm
+- Production: Use battle-tested library functions (they're optimized)
+- Interviews: Know both approaches, ask which they prefer
+
+Example: I wrote nested loops for permutations, then discovered `itertools.permutations` does it in one line. The exercise of writing it myself helped me understand it, but I'll use the library version in practice.
+
+---
+
 ### 🔄 How do real-world applications handle floating point precision errors?
 **Context:** In the clock angle problem, calculations like `30.5 * 7` can produce `213.50000000000003`.
 
