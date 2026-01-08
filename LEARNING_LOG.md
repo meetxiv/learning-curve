@@ -34,17 +34,35 @@ There's no shortcut. Everyone who's good at this put in the hours. My job is to 
 Completed 10 Python exercises on variables, data types, and operators.
 
 **Key insights:**
-- Used `sep` and `end` parameters in `print()` to format output—cleaner than string concatenation
-- `sep` is used when multiple parameters are passed in the same `print()` function and `end` when communicating through multiple `print()` functions
-- `.join()` is actually very flexible and can be used in scenarios creatively 
-- Discovered `map()` + `split()` combo for converting user input strings to numeric tuples in one line: `tuple(map(int, input().split(',')))`
-- Solved the dogs-chickens problem using constraint validation (legs must be even, within valid range) before calculation—learned to fail early
-- Floor division (`//`) vs regular division matters for discrete quantities like counting glasses of milk
-- Input validation isn't optional—added checks for impossible scenarios (like odd number of legs for animals)
 
-**Struggled with:** Initially overcomplicated the chicken-dogs problem by approaching it with rule based constraints and even factorising the problem, later realised it is solvable with basic linear algebra.
+**1. `print()` is more powerful than you think:**  
+The `sep` and `end` parameters make formatting cleaner than string concatenation:
+```python
+print(a, b, c, sep=' | ')     # separator between items
+print("Loading", end='...')   # no newline at end
+```
+`sep` works within one `print()`, `end` controls what happens after.
 
-THINKING ELEMENTARY SOLVES THE PROBLEM.
+**2. One-liner input conversion:**  
+Converting comma-separated user input to numeric tuple:
+```python
+tuple(map(int, input().split(',')))  # "1,2,3" -> (1, 2, 3)
+```
+The `map()` + `split()` combo is everywhere in competitive programming.
+
+**3. Validate before calculating:**  
+In the dogs-chickens problem, I learned to check constraints first (legs must be even, within valid range) before attempting calculation. Fail early, fail clearly.
+
+**4. Floor division for discrete quantities:**  
+`//` vs `/` matters when counting whole items:
+```python
+milk_glasses = total_ml // 250  # can't have 2.5 glasses
+```
+
+**Struggled with:**  
+Initially overcomplicated the chicken-dogs problem with rule-based constraints and factorization. Later realized it's just basic linear algebra: 2 equations, 2 unknowns.
+
+**Realization:** THINKING ELEMENTARY SOLVES THE PROBLEM.
 
 ---
 
@@ -54,63 +72,87 @@ THINKING ELEMENTARY SOLVES THE PROBLEM.
 Solved 15 miscellaneous Python problems covering lists, strings, dictionaries, and functional programming concepts (map, filter, reduce).
 
 **Key insights:**
-- `set()` is the fastest way to get unique elements from a list
-- `*args` in function definitions is powerful—used it to merge an arbitrary number of dictionaries using `dict.update()` in a loop
-- `*args` is a notation (can also be *anything) it is a tuple, while `**kwargs` is a dictionary
-- `dict.get(key, 0)` pattern is essential for frequency counting (finding mode of words) without throwing KeyErrors
-- List comprehensions make filtering (like extracting even numbers) much more readable than loops
-- For histogram binning, integer division (`// 10 * 10`) is a clever trick to find the lower bound of a bin without complex if-else chains
-- **Bag of Words:** Implemented a simple NLP model using dictionary frequency counting—realized this is the foundation of text vectorization
-- **Functional Programming:**
-  - `map()` with `lambda` can process multiple lists in parallel (e.g., `map(lambda x,y,z: x+y+z, l1, l2, l3)`)
-  - `reduce()` is surprisingly elegant for flattening 2D lists (`reduce(lambda x,y: x+y, list_2d)`)
-  - Chaining `filter()` and `map()` allows complex data transformations in a single readable line (filtering employees by grade -> extracting full names)
+
+**1. `set()` for instant uniqueness:**  
+Fastest way to get unique elements—O(1) average lookup:
+```python
+unique_items = list(set(my_list))
+```
+
+**2. `*args` unpacking power:**  
+Used it to merge an arbitrary number of dictionaries:
+```python
+def merge_dicts(*dicts):
+    result = {}
+    for d in dicts:
+        result.update(d)
+    return result
+```
+`*args` is a tuple, `**kwargs` is a dictionary.
+
+**3. `dict.get()` prevents KeyError:**  
+Essential pattern for frequency counting:
+```python
+freq[word] = freq.get(word, 0) + 1  # no KeyError if word is new
+```
+
+**4. Histogram binning trick:**  
+Integer division finds bin boundaries without if-else chains:
+```python
+bin_start = value // 10 * 10  # 47 -> 40, 83 -> 80
+```
+
+**5. Functional programming chains:**  
+- `map()` processes multiple lists in parallel: `map(lambda x,y,z: x+y+z, l1, l2, l3)`
+- `reduce()` flattens 2D lists elegantly: `reduce(lambda x,y: x+y, list_2d)`
+- Chaining `filter()` and `map()` enables complex one-liners
 
 **Struggled with:**  
-The histogram problem was tricky. I had to figure out how to dynamically generate bin ranges based on the input data's min/max values instead of hardcoding them. Also, getting comfortable with nested lambda functions took some trial and error.
+The histogram problem—had to figure out dynamic bin generation based on data's min/max. Also, nested lambda functions took some trial and error.
 
 ---
 
 ### Day 4 | Jan 6, 2026
 
 **What I did:**  
-Solved 14 problems on conditionals and control flow—salary calculations, number theory (primes, Armstrong, Fibonacci), and even a robot movement tracker.
+Solved 14 problems on conditionals and control flow—salary calculations, number theory (primes, Armstrong, Fibonacci), and a robot movement tracker.
 
+**Key insights:**
 
 **1. Prime number optimization:**  
-Instead of checking all numbers up to `n`, only check up to `√n`. If a number has a factor greater than its square root, it must also have one smaller than it. Reduced complexity from O(n) to O(√n).
+Only check up to √n. If a number has a factor greater than its square root, it must also have one smaller:
 ```python
-for num in range(2, int(n**0.5) + 1):  # not range(2, n)
+for num in range(2, int(n**0.5) + 1):  # O(√n) not O(n)
 ```
 
-**2. Digit extraction pattern:**  
-To process each digit of a number without converting to string:
+**2. Digit extraction without strings:**  
+Process each digit mathematically:
 ```python
 while num > 0:
     digit = num % 10   # extract last digit
     num //= 10         # remove last digit
 ```
-Used this for reversing numbers and checking Armstrong numbers. Pure math > string manipulation.
+Used for reversing numbers, Armstrong check. Pure math > string manipulation.
 
 **3. State machines with dictionaries:**  
-Built a robot tracker that maintains position using a dictionary as state:
+Robot tracker using dict as state:
 ```python
 moves = {'U': 0, 'D': 0, 'L': 0, 'R': 0}
 moves[direction] += distance
 ```
-Much cleaner than multiple if-else chains or separate variables.
+Much cleaner than multiple if-else chains.
 
-**4. Clock angle problem:**  
-The minute hand moves 6° per minute (360°/60). The hour hand moves 0.5° per minute (30°/60). I spent hell lot of time on this problem scribbling calculations on paper trying tp find out methods and in the end this problem taught me to think in terms of rates, not positions.
+**4. Clock angle = rate problem:**  
+Minute hand: 6° per minute (360°/60). Hour hand: 0.5° per minute (30°/60). Think in rates, not positions.
 
-**5. Multiple exit conditions in loops:**  
-Combining `continue` (skip iteration) and `break` (exit loop) for complex conditions like "sum until 300, but skip multiples of 5."
+**5. Loop control flow:**  
+`continue` (skip iteration) + `break` (exit loop) for complex conditions like "sum until 300, but skip multiples of 5."
 
 **Struggled with:**  
-The clock angle problem initially. I was calculating positions instead of relative movement. Had to step back and think about it mathematically—both hands start at 12, minute hand laps the hour hand. The angle is just the difference in their positions.
+Clock angle problem—I was calculating positions instead of relative movement. Had to think mathematically: both hands start at 12, angle is just the difference in their positions.
 
-**Pattern I'm noticing:**  
-Most "tricky" problems become simple once you identify the underlying math. Fibonacci is just addition with memory. Prime checking is about factors. Armstrong is digit extraction + power. The code is just translating math to syntax and the Clock problem is just rate determination.
+**Realization:**  
+Most "tricky" problems become simple once you identify the underlying math. The code is just translating math to syntax.
 
 ---
 
@@ -181,6 +223,71 @@ The pyramid pattern alignment. I kept getting off-by-one errors with the spaces.
 
 **Realization:**  
 Pattern problems aren't really about patterns—they're about finding the mathematical relationship between row number and what gets printed. Once you find that formula, the code writes itself.
+
+---
+
+### Day 6 | Jan 8, 2026
+
+**What I did:**  
+Deep dive into Python's core data structures—tuples, sets, and dictionaries. Practiced problems that combine them in interesting ways.
+
+**Key insights:**
+
+**1. `setdefault()` is underrated:**  
+For grouping data by a key, this is cleaner than checking if key exists:
+```python
+groups = {}
+for key, value in data:
+    groups.setdefault(key, []).append(value)
+# No need for: if key not in groups: groups[key] = []
+```
+It returns the existing value OR sets and returns the default—all in one operation.
+
+**2. Sets for membership testing:**  
+When checking if elements exist across multiple collections, set intersection is O(n):
+```python
+common = set(ar1) & set(ar2) & set(ar3)  # elements in ALL three
+```
+Way faster than nested loops checking each element.
+
+**3. Binary string = exactly 2 unique characters:**  
+Elegant one-liner using set comprehension:
+```python
+is_binary = len(set(string)) == 2
+```
+I initially thought about checking for '0' and '1', but the actual definition is broader.
+
+**4. `zip()` for parallel dictionary construction:**  
+Converting list to list of dictionaries:
+```python
+# Verbose way with nested loops
+# Elegant way:
+result = [dict(zip(keys, values[i:i+len(keys)])) 
+          for i in range(0, len(values), len(keys))]
+```
+`zip()` pairs up keys with corresponding values automatically.
+
+**5. Sorting dictionaries properly:**  
+`sorted(dict.items())` returns sorted tuples, but you need to reconstruct:
+```python
+sorted_dict = {k: sorted(v) for k, v in sorted(original.items())}
+```
+Sorts both keys AND the value lists.
+
+**6. Type checking in mixed collections:**  
+`type()` returns the actual class, useful for counting:
+```python
+counts = {}
+for item in mixed_list:
+    counts[type(item)] = counts.get(type(item), 0) + 1
+# {<class 'list'>: 2, <class 'set'>: 2, <class 'tuple'>: 1}
+```
+
+**Struggled with:**  
+The tuple grouping problem—joining `(5,6), (5,7), (5,8)` into `(5,6,7,8)`. Initially tried complex list manipulations. Then discovered `setdefault()` + unpacking makes it trivial. Sometimes the right tool makes the problem disappear.
+
+**Realization:**  
+Tuples, sets, and dicts aren't just "data containers"—they're problem-solving tools. Sets for uniqueness/membership, dicts for grouping/lookup, tuples for immutable records. Choosing the right structure is half the solution.
 
 ---
 

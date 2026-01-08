@@ -132,4 +132,44 @@ Example: I wrote nested loops for permutations, then discovered `itertools.permu
 
 ---
 
+## Data Structures
+
+### ✅ When to use tuple vs list?
+**Answered:**
+- **Tuple:** Immutable, use for fixed records (coordinates, RGB values, database rows). Hashable so can be dict keys.
+- **List:** Mutable, use when you need to modify elements, append, remove.
+
+Tuples are also slightly faster for iteration and use less memory. If you're not modifying it, prefer tuple.
+
+---
+
+### ✅ `setdefault()` vs checking if key exists?
+**Answered:** `setdefault()` is cleaner and atomic:
+```python
+# Instead of:
+if key not in d:
+    d[key] = []
+d[key].append(value)
+
+# Use:
+d.setdefault(key, []).append(value)
+```
+One operation instead of two, and you avoid race conditions in concurrent code.
+
+---
+
+### 🔄 How do sets handle hash collisions?
+**Context:** Sets use hashing for O(1) lookup, but what happens when two objects have the same hash?
+
+**Status:** Need to research Python's collision resolution strategy. Related to why custom objects need both `__hash__` and `__eq__`.
+
+---
+
+### 🔄 Why can't lists be dictionary keys but tuples can?
+**Current understanding:** Dict keys must be hashable. Lists are mutable, so their hash could change after being added as a key, breaking the dictionary.
+
+Tuples are immutable, so their hash is stable. But what about tuples containing lists? Need to explore edge cases.
+
+---
+
 *Questions will be added and answered as I progress through my learning journey.*
