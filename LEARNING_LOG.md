@@ -291,4 +291,68 @@ Tuples, sets, and dicts aren't just "data containers"—they're problem-solving 
 
 ---
 
+### Day 7 | Jan 9, 2026
+
+**What I did:**  
+List comprehensions day. Solved 15 problems focusing on condensing logic into single expressions—matrix operations, string transformations, running sums.
+
+**Key insights:**
+
+**1. `zip()` is the secret weapon:**  
+For combining lists index-wise, forget manual indexing:
+```python
+[[x, y] for x, y in zip(list1, list2)]
+# ["M", "na", "i"] + ["y", "me", "s"] -> [["M","y"], ["na","me"], ["i","s"]]
+```
+`zip()` handles unequal lengths gracefully by stopping at the shortest.
+
+**2. Running sum with slicing:**  
+Elegant but O(n²) approach using cumulative slices:
+```python
+[sum(list1[:i]) for i in range(1, len(list1)+1)]
+# [1,2,3,4] -> [1, 3, 6, 10]
+```
+For production, use `itertools.accumulate()` for O(n).
+
+**3. Nested list comprehension order matters:**  
+For flattening matrices, the loop order in comprehension mirrors nested for-loops:
+```python
+# Nested loops:          # Comprehension:
+for r in range(3):       [matrix[r][c] for r in range(3) for c in range(3)]
+    for c in range(3):
+        matrix[r][c]
+```
+First `for` is outer, second `for` is inner. Same order.
+
+**4. Matrix transpose in one line:**  
+Swap row and column indices:
+```python
+transpose = [[matrix[r][c] for r in range(3)] for c in range(3)]
+```
+Outer loop iterates columns, inner loop iterates rows—that's the swap.
+
+**5. String join + split for list flattening:**  
+Quick way to flatten list of strings:
+```python
+' '.join(list_of_strings).split()
+# ['hello world', 'foo bar'] -> ['hello', 'world', 'foo', 'bar']
+```
+Join with space, then split on whitespace. Simple but clever.
+
+**6. Custom sorting with `zip()` trick:**  
+To sort by computed values without losing original data:
+```python
+scores = [compute_score(item) for item in items]
+sorted_items = [x[-1] for x in sorted(zip(scores, items), reverse=True)]
+```
+Zip scores with items, sort by scores, extract items.
+
+**Struggled with:**  
+The alphanumeric sorting problem—sort strings by product of their digits. Had to think about it in steps: extract digits → compute product → pair with original → sort → extract. Breaking complex transformations into pipeline steps helps.
+
+**Realization:**  
+List comprehensions aren't just "shorter loops"—they're a way to think about data transformations as pipelines. Input → Transform → Output. Once you see it that way, complex operations become compositions of simple ones.
+
+---
+
 *Log entries will be added as I progress...*
