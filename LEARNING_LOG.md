@@ -355,4 +355,77 @@ List comprehensions aren't just "shorter loops"—they're a way to think about d
 
 ---
 
+### Day 8 | Jan 10, 2026
+
+**What I did:**  
+Started Object-Oriented Programming. Built classes for Rectangle, BankAccount, and a FlashCard quiz game. Focus on encapsulation—hiding data, exposing behavior.
+
+**Key insights:**
+
+**1. Double underscore = name mangling (not true private):**  
+Python's `__variable` isn't actually private—it just mangles the name:
+```python
+class Bank:
+    def __init__(self):
+        self.__balance = 1000  # becomes _Bank__balance
+
+obj = Bank()
+print(obj._Bank__balance)  # Still accessible, just discouraged
+```
+It's a convention, not enforcement. Python trusts developers.
+
+**2. `__str__` for human-readable representation:**  
+Define how your object looks when printed:
+```python
+def __str__(self):
+    return f'Rectangle({self.__length}, {self.__width})'
+# Now print(obj) shows: Rectangle(4, 5)
+```
+Without it, you get `<__main__.Rectangle object at 0x...>`. Useless.
+
+**3. Methods that use other methods:**  
+`display()` calling `perimeter()` and `area()` internally:
+```python
+def display(self):
+    print(f'Perimeter = {self.perimeter()}')  # self.method()
+    print(f'Area = {self.area()}')
+```
+Build complex behavior from simple methods. Composition over duplication.
+
+**4. Business logic in methods, not outside:**  
+Bank withdrawal with fee calculation inside the class:
+```python
+def withdraw(self, amount):
+    if amount > self.__balance:
+        print('Insufficient funds!')
+    else:
+        self.__balance -= self.bankFees(amount)
+```
+The class knows its rules. Caller doesn't need to know about fees.
+
+**5. `random.choice()` on dict items:**  
+For the FlashCard quiz, picking random key-value pairs:
+```python
+fruit, color = random.choice(list(self.__fruitlist.items()))
+```
+`dict.items()` returns view, need `list()` for `random.choice()`.
+
+**6. Game loops with class state:**  
+The FlashCard class maintains its own data, the `quiz()` method handles the loop:
+```python
+while True:
+    # ask question using self.__data
+    if user_wants_to_exit:
+        break
+```
+State (questions) is encapsulated, behavior (quiz logic) is exposed.
+
+**Struggled with:**  
+Initially put the bank fee calculation outside the class. Then realized—if the fee percentage changes, every place that calls `withdraw()` would need updating. Encapsulating it means one change, one place.
+
+**Realization:**  
+OOP isn't about making things complicated—it's about organizing code so that related data and behavior live together. The BankAccount class "knows" how to handle deposits, withdrawals, and fees. Users of the class don't need to know the implementation details.
+
+---
+
 *Log entries will be added as I progress...*

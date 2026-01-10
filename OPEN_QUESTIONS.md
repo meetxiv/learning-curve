@@ -172,4 +172,39 @@ Tuples are immutable, so their hash is stable. But what about tuples containing 
 
 ---
 
+## Object-Oriented Programming
+
+### ✅ What does `__` (double underscore) actually do in Python?
+**Answered:** It's name mangling, not true privacy. `self.__var` becomes `self._ClassName__var`:
+```python
+class Foo:
+    def __init__(self):
+        self.__secret = 42
+
+obj = Foo()
+# obj.__secret  # AttributeError
+obj._Foo__secret  # Works! Returns 42
+```
+Python's philosophy: "We're all consenting adults." It discourages access, doesn't prevent it.
+
+---
+
+### 🔄 When to use `@property` vs regular methods?
+**Current thinking:**
+- `@property`: When access looks like an attribute but needs computation (e.g., `circle.area`)
+- Method: When it's clearly an action or takes parameters (e.g., `account.withdraw(100)`)
+
+Still exploring: Are there performance implications?
+
+---
+
+### 🔄 What's the difference between `__str__` and `__repr__`?
+**Current understanding:**
+- `__str__`: Human-readable, for end users (what `print()` uses)
+- `__repr__`: Unambiguous, for developers (what the REPL shows)
+
+Rule of thumb: `__repr__` should ideally return something you could paste into Python to recreate the object.
+
+---
+
 *Questions will be added and answered as I progress through my learning journey.*
