@@ -428,4 +428,97 @@ OOP isn't about making things complicated—it's about organizing code so that r
 
 ---
 
+### Day 9 | Jan 11, 2026
+
+**What I did:**  
+Inheritance in OOP. Built a Bus class extending Vehicle, learned how child classes override parent methods while still using parent functionality.
+
+**Key insights:**
+
+**1. `super().__init__()` calls parent constructor:**  
+```python
+class Bus(Vehicle):
+    def __init__(self, capacity=50):
+        super().__init__(capacity)  # Parent sets up base attributes
+```
+Without `super()`, parent's `__init__` never runs—attributes won't exist.
+
+**2. Override method but still access parent's version:**  
+Bus has its own `fare()` but needs the base calculation:
+```python
+def fare(self):
+    base_fare = self.get_seating_capacity() * 100
+    return base_fare * 1.1  # Add 10% maintenance
+```
+Use getter methods when parent attributes are private (`__`).
+
+**3. Default arguments in child classes:**  
+Child can have different defaults than parent:
+```python
+class Vehicle:
+    def __init__(self, capacity):  # Required
+        
+class Bus(Vehicle):
+    def __init__(self, capacity=50):  # Optional with default
+```
+
+**Struggled with:**  
+Accessing `self.__seating_capacity` from child class—got AttributeError. Private attributes aren't inherited directly. Had to use parent's getter method instead.
+
+**Realization:**  
+Inheritance is about extending, not copying. The child says "I'm a Vehicle, but with these extras."
+
+---
+
+### Day 10 | Jan 12, 2026
+
+**What I did:**  
+Composition and class relationships. Built a Card/Deck system where Deck contains Card objects. Also practiced class methods and instance counting.
+
+**Key insights:**
+
+**1. Composition = objects containing objects:**  
+Deck isn't a Card, it *has* Cards:
+```python
+class Deck:
+    def __init__(self):
+        self.cards = [Card(suit, val) for suit in suits for val in values]
+```
+52 Card objects live inside one Deck object.
+
+**2. `__repr__` vs `__str__`:**  
+`__repr__` is for developers (in lists, debugger):
+```python
+def __repr__(self):
+    return f"{self.value} of {self.suit}"
+# [Ace of Hearts, 2 of Hearts, ...]  <- shows nicely in lists
+```
+
+**3. `@classmethod` for alternative constructors:**  
+When you want different ways to create an object:
+```python
+@classmethod
+def from_dimensions(cls, length, width):
+    return cls(length, width)
+
+rect = Rectangle.from_dimensions(10, 5)
+```
+`cls` is the class itself, not an instance.
+
+**4. `list.pop()` removes AND returns:**  
+For dealing cards:
+```python
+def deal(self):
+    return self.cards.pop()  # Returns last card, removes from deck
+```
+Deck shrinks as you deal. State changes naturally.
+
+**Struggled with:**  
+Initially confused `@classmethod` with `@staticmethod`. Classmethod gets the class (`cls`), staticmethod gets nothing—it's just a regular function namespaced inside the class.
+
+**Realization:**  
+Good class design mirrors real-world relationships. A deck contains cards, you deal from a deck, cards have suits and values. If your code structure matches the mental model, it's easier to reason about.
+
+---
+
 *Log entries will be added as I progress...*
